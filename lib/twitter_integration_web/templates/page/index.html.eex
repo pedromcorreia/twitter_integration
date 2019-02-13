@@ -1,37 +1,54 @@
 <div class="row marketing">
   <%= for tweet <- @tweets do %>
-    <div class="form-group">
-      <div>
-        <label>screen_name (@usuario):</label>
-        <label>@<%= tweet.screen_name %></label>
+    <div class="panel panel-default">
+      <div class="panel-heading">Tweet</div>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">screen_name (@usuario):</label>
+        <div class="col-sm-10">
+          <label class="form-control">@<%= tweet.screen_name %></label>
+        </div>
       </div>
-      <div>
-        <label>Número de seguidores do autor:</label>
-        <label><%= tweet.followers_count %></label>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">Número de seguidores do autor:</label>
+        <div class="col-sm-10">
+          <label class="form-control"><%= tweet.followers_count %></label>
+        </div>
       </div>
-      <div>
-        <label>Número de retweets:</label>
-        <label><%= tweet.retweet_count %></label>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">Número de retweets:</label>
+        <div class="col-sm-10">
+          <label class="form-control"><%= tweet.retweet_count %></label>
+        </div>
       </div>
-      <div>
-        <label>Número favorites do tweet:</label>
-        <label><%= tweet.favorite_count %></label>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">Número favorites do tweet:</label>
+        <div class="col-sm-10">
+          <label class="form-control"><%= tweet.favorite_count %></label>
+        </div>
       </div>
-      <div>
-        <label>Conteúdo do tweet:</label>
-        <label><%= tweet.text %></label>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">Conteúdo do tweet:</label>
+        <div class="col-sm-10">
+          <label class="form-control"><%= tweet.text %></label>
+        </div>
       </div>
-      <div>
-        <label>Data e hora:</label>
-        <label><%= tweet.created_at %></label>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">Data e hora:</label>
+        <div class="col-sm-10">
+          <label class="form-control"><%= tweet.created_at %></label>
+        </div>
       </div>
-      <div>
-        <label>Link para o perfil:</label>
-        <label><%= tweet.profile_url %></label>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">Data e hora:</label>
+        <div class="col-sm-10">
+          <label class="form-control"><%= tweet.profile_url %></label>
+        </div>
       </div>
-      <div>
-        <label>Link para o tweet:</label>
-        <label><%= tweet.tweet_url %></label>
+      <div class="panel-body">
+        <label class="col-sm-2 col-form-label">Link para o tweet:</label>
+        <div class="col-sm-10">
+          <label class="form-control"><%= tweet.tweet_url %></label>
+        </div>
       </div>
     </div>
   <% end %>
