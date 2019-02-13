@@ -3,30 +3,15 @@ defmodule TwitterIntegration do
   Documentation for TwitterIntegration.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-  iex> TwitterIntegration.hello()
-  :world
-
-  """
-  def hello do
-    :world
-  end
-
   @url Application.get_env(:twitter_integration, :url)
   @auth Application.get_env(:twitter_integration, :auth)
   @url_twitter ~s(https://twitter.com/)
 
   def run() do
     headers = [Username: @auth, Accept: "Application/json; Charset=utf-8"]
-    {:ok, response} = HTTPoison.get(@url, headers)
-
-    case Map.get(response, :status_code) do
-      200 -> parse_body(response)
-      _ -> IO.inspect("B")
+    case HTTPoison.get(@url, headers) do
+      {:ok, response} -> parse_body(response)
+      {:error, %HTTPoison.Error{id: nil, reason: :nxdomain}} -> {:error, %HTTPoison.Error{id: nil, reason: :nxdomain}}
     end
   end
 
