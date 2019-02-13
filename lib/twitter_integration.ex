@@ -16,12 +16,13 @@ defmodule TwitterIntegration do
     :world
   end
 
+  @url Application.get_env(:twitter_integration, :url)
+  @auth Application.get_env(:twitter_integration, :auth)
   @url_twitter ~s(https://twitter.com/)
 
   def run() do
-    headers = [Username: " pedmcor@gmail.com", Accept: "Application/json; Charset=utf-8"]
-    url = "http://tweeps.locaweb.com.br/tweeps"
-    {:ok, response} = HTTPoison.get(url, headers)
+    headers = [Username: @auth, Accept: "Application/json; Charset=utf-8"]
+    {:ok, response} = HTTPoison.get(@url, headers)
 
     case Map.get(response, :status_code) do
       200 -> parse_body(response)
