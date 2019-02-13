@@ -1,4 +1,13 @@
 <div class="row marketing">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%=link("most relevants", to: "most_relevants", method: "get", class: "nav-link btn-info")%>
+    </li>
+    <li class="nav-item">
+      <%=link("most mentions", to: "most_mentions", method: "get", class: "nav-link")%>
+    </li>
+  </ul>
+
   <%= for tweet <- @tweets do %>
     <div class="panel panel-default">
       <div class="panel-heading">Tweet</div>

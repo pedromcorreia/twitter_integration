@@ -1,19 +1,48 @@
-# TwitterIntegration
+# Tweeps integration platform
 
-To start your Phoenix server:
+This application is responsible for integrate with the http://tweeps.locaweb.com.br/tweeps.
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+1. The main feature is list the tweets by some rules.
+2. The second main feature is list the tweets by most_relevant.
+2. The second main feature is transfer the amount with the existing users.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+# Application structure
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+ # Example
 
-## Learn more
+ (localhost:5000/most_mentions) - GET
+  - render the tweets by most mentions
+  - render by the rules
+  - filter by the rules
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+ (localhost:5000/most_relevants) - GET
+  - render the tweets by most relevants
+  - render by the the most mentioned user
+  - filter by the rules
+  - sort by the users
+
+ rules:
+ * tweet that mentioned Locaweb user
+ * tweet that is not reply for twees from Locaweb
+
+ sort default:
+  1. User with more followers
+  2. Tweets with more rt
+  3. Tweets with more likes
+
+ # Running the application
+
+ Use the `$ iex -S mix phx.server` to run the application.
+
+ # Testing
+
+ Test all suite:
+
+ `$ mix tests`
+
+ # Contributing
+
+ To contribute, please follow some patterns:
+  - Commit messages, documentation and all code related things in english;
+  - Before open pull requests, make sure that `credo` was executed;
+
