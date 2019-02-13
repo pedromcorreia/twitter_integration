@@ -8,22 +8,24 @@ defmodule TwitterIntegration do
 
   ## Examples
 
-      iex> TwitterIntegration.hello()
-      :world
+  iex> TwitterIntegration.hello()
+  :world
 
   """
   def hello do
     :world
   end
 
+  @url_twitter ~s(https://twitter.com/)
+
   def run() do
-    headers = ["Username": " pedmcor@gmail.com", "Accept": "Application/json; Charset=utf-8"]
+    headers = [Username: " pedmcor@gmail.com", Accept: "Application/json; Charset=utf-8"]
     url = "http://tweeps.locaweb.com.br/tweeps"
     {:ok, response} = HTTPoison.get(url, headers)
 
     case Map.get(response, :status_code) do
       200 -> parse_body(response)
-      _ -> IO.inspect "B"
+      _ -> IO.inspect("B")
     end
   end
 
@@ -31,15 +33,46 @@ defmodule TwitterIntegration do
     body
     |> Poison.decode!()
     |> Map.get("statuses")
-    |> Enum.filter(& Map.get(&1, "in_reply_to_user_id") != 42)
-    |> Enum.filter(& not is_nil(user_mentions(&1)))
-    |> Enum.map(fn tweet -> IO.inspect tweet end)
+    |> Enum.filter(&(Map.get(&1, "in_reply_to_user_id") != 42))
+    |> Enum.filter(&(not is_nil(user_mentions(&1))))
+    |> Enum.sort_by(
+      &{Map.get(&1, "user") |> Map.get("followers_count"), Map.get(&1, "retweet_count"),
+       Map.get(&1, "favorite_count")}
+    )
+    |> build_export_tweets()
   end
 
   defp user_mentions(tweet) do
     tweet
     |> Map.get("entities")
     |> Map.get("user_mentions")
-    |> Enum.find(& Map.get(&1, "id") == 42)
+    |> Enum.find(&(Map.get(&1, "id") == 42))
+  end
+
+  defp build_export_tweets(tweets) when is_list(tweets) do
+    Enum.map(tweets, &build_export_tweet(&1))
+  end
+
+  defp build_export_tweet(
+         %{
+           "user" => %{"screen_name" => screen_name, "followers_count" => followers_count},
+           "id" => id,
+           "created_at" => created_at,
+           "text" => text,
+           "favorite_count" => favorite_count,
+           "retweet_count" => retweet_count
+         } = tweet
+       )
+       when is_map(tweet) do
+    %{
+      screen_name: screen_name,
+      followers_count: followers_count,
+      retweet_count: retweet_count,
+      favorite_count: favorite_count,
+      text: text,
+      created_at: created_at,
+      profile_url: @url_twitter <> screen_name,
+      tweet_url: @url_twitter <> screen_name <> "/status/#{id}"
+    }
   end
 end
