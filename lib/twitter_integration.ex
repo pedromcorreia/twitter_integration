@@ -15,7 +15,7 @@ defmodule TwitterIntegration do
     end
   end
 
-  def parse_body(%HTTPoison.Response{body: body}) do
+  defp parse_body(%HTTPoison.Response{body: body}) do
     body
     |> Poison.decode!()
     |> Map.get("statuses")

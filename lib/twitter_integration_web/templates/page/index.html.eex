@@ -1,36 +1,38 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
 <div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
+  <%= for tweet <- @tweets do %>
+    <div class="form-group">
+      <div>
+        <label>screen_name (@usuario):</label>
+        <label>@<%= tweet.screen_name %></label>
+      </div>
+      <div>
+        <label>Número de seguidores do autor:</label>
+        <label><%= tweet.followers_count %></label>
+      </div>
+      <div>
+        <label>Número de retweets:</label>
+        <label><%= tweet.retweet_count %></label>
+      </div>
+      <div>
+        <label>Número favorites do tweet:</label>
+        <label><%= tweet.favorite_count %></label>
+      </div>
+      <div>
+        <label>Conteúdo do tweet:</label>
+        <label><%= tweet.text %></label>
+      </div>
+      <div>
+        <label>Data e hora:</label>
+        <label><%= tweet.created_at %></label>
+      </div>
+      <div>
+        <label>Link para o perfil:</label>
+        <label><%= tweet.profile_url %></label>
+      </div>
+      <div>
+        <label>Link para o tweet:</label>
+        <label><%= tweet.tweet_url %></label>
+      </div>
+    </div>
+  <% end %>
 </div>
