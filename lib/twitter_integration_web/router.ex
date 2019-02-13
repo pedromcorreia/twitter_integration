@@ -17,10 +17,7 @@ defmodule TwitterIntegrationWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/most_relevants", PageController, :most_relevants
+    get "/most_mentions", PageController, :most_mentions
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", TwitterIntegrationWeb do
-  #   pipe_through :api
-  # end
 end
