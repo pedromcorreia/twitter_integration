@@ -16,7 +16,8 @@ defmodule TwitterIntegration.Mixfile do
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-      deps: deps()
+      deps: deps(),
+      escript: [main_module: TwitterIntegration.CLI]
     ]
   end
 

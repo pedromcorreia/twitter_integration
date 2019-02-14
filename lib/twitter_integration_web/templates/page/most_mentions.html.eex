@@ -8,7 +8,7 @@
     </li>
   </ul>
 
-  <%= Enum.map(@tweets, fn {screen_name, tweet_list} -> %>
+  <%= Enum.map(@tweets, fn {_screen_name, tweet_list} -> %>
     <%= for tweet <- tweet_list do %>
       <div class="panel panel-default">
         <div class="panel-heading">User tweet: @<%= tweet.screen_name %></div>
