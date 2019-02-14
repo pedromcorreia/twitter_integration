@@ -9,10 +9,6 @@ defmodule TwitterIntegrationWeb.Router do
     plug(:put_secure_browser_headers)
   end
 
-  pipeline :api do
-    plug(:accepts, ["json"])
-  end
-
   scope "/", TwitterIntegrationWeb do
     # Use the default browser stack
     pipe_through(:browser)
