@@ -30,6 +30,9 @@ This application is responsible for integrate with the http://tweeps.locaweb.com
   2. Tweets with more rt
   3. Tweets with more likes
 
+ # Running with docker
+ Use the `docker-compose up`, then acess localhost:5000/most_mentions
+
  # Running the application
 
  Use the `$ iex -S mix phx.server` to run the application.
