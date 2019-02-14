@@ -6,6 +6,9 @@ This application is responsible for integrate with the http://tweeps.locaweb.com
 2. The second main feature is list the tweets by most_relevant.
 2. The second main feature is transfer the amount with the existing users.
 
+# Why used this structure?
+- I used Elixir and its tools, such as HTTPoison and Poison for development, this made the application simple, compact and easy to maintain. I also used credo and excoverall to improve the code with the conventions of the language.
+
 # Application structure
 
  # Example
