@@ -10,8 +10,7 @@ config :twitter_integration, TwitterIntegrationWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "mQpgmEXrrWXr26zsXyYCS5FtHtOu0fAqqsacqyac9NZ0LpCI2Z7mlaX10g6rLClL",
   render_errors: [view: TwitterIntegrationWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: TwitterIntegration.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: TwitterIntegration.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -20,7 +19,8 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
+
 config :twitter_integration,
   url: "http://tweeps.locaweb.com.br/tweeps",
   auth: "pedmcor@gmail.com"

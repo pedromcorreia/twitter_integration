@@ -9,11 +9,13 @@ defmodule TwitterIntegration do
 
   def run(route \\ :most_relevants) do
     headers = [Username: @auth, Accept: "Application/json; Charset=utf-8"]
+
     case HTTPoison.get(@url, headers) do
       {:ok, response} ->
         response
         |> parse_body()
         |> build_export_tweets(route)
+
       {:error, %HTTPoison.Error{id: nil, reason: :nxdomain}} ->
         {:error, %HTTPoison.Error{id: nil, reason: :nxdomain}}
     end
@@ -26,9 +28,8 @@ defmodule TwitterIntegration do
     |> Enum.filter(&(Map.get(&1, "in_reply_to_user_id") != 42))
     |> Enum.filter(&(not is_nil(user_mentions(&1))))
     |> Enum.sort_by(
-      &{&1 |> Map.get("user") |> Map.get("followers_count"),
-        Map.get(&1, "retweet_count"),
-        Map.get(&1, "favorite_count")}
+      &{&1 |> Map.get("user") |> Map.get("followers_count"), Map.get(&1, "retweet_count"),
+       Map.get(&1, "favorite_count")}
     )
   end
 
@@ -51,16 +52,16 @@ defmodule TwitterIntegration do
   end
 
   def build_export_tweet(
-    %{
-      "user" => %{"screen_name" => screen_name, "followers_count" => followers_count},
-      "id" => id,
-      "created_at" => created_at,
-      "text" => text,
-      "favorite_count" => favorite_count,
-      "retweet_count" => retweet_count
-    } = tweet
-  )
-  when is_map(tweet) do
+        %{
+          "user" => %{"screen_name" => screen_name, "followers_count" => followers_count},
+          "id" => id,
+          "created_at" => created_at,
+          "text" => text,
+          "favorite_count" => favorite_count,
+          "retweet_count" => retweet_count
+        } = tweet
+      )
+      when is_map(tweet) do
     %{
       screen_name: screen_name,
       followers_count: followers_count,
