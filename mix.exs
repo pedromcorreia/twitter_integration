@@ -9,6 +9,8 @@ defmodule TwitterIntegration.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
       deps: deps()
     ]
   end
@@ -40,7 +42,9 @@ defmodule TwitterIntegration.Mixfile do
       {:cowboy, "~> 1.0"},
       {:httpoison, "~> 1.5"},
       {:poison, "~> 3.1"},
-      {:plug_cowboy, "~> 1.0"}
+      {:plug_cowboy, "~> 1.0"},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false}
     ]
   end
 end
